@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Expediente #022 — El Sínodo de Dort — Expedientes Calvino</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=IBM+Plex+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --paper:#efe4c9;
+      --paper-2:#e8d9b7;
+      --ink:#171512;
+
+      --card-green:#8aa7a0;
+      --card-ochre:#d7b56b;
+      --card-red:#c67b6d;
+      --card-blue:#7f9aa2;
+
+      --border: rgba(23,21,18,.45);
+      --shadow: rgba(0,0,0,.10);
+
+      --stamp:#8b1e1e;
+
+      --radius: 14px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 800px at 20% 10%, rgba(255,255,255,.35), transparent 60%),
+        radial-gradient(900px 700px at 80% 30%, rgba(0,0,0,.05), transparent 60%),
+        linear-gradient(180deg, var(--paper), var(--paper-2));
+      font-family:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      opacity:.28;
+      background:
+        radial-gradient(12px 10px at 12% 20%, rgba(0,0,0,.10), transparent 60%),
+        radial-gradient(18px 14px at 70% 16%, rgba(0,0,0,.08), transparent 60%),
+        radial-gradient(22px 18px at 86% 62%, rgba(0,0,0,.07), transparent 60%),
+        radial-gradient(14px 10px at 28% 78%, rgba(0,0,0,.08), transparent 60%),
+        radial-gradient(900px 500px at 50% 110%, rgba(0,0,0,.06), transparent 60%);
+      mix-blend-mode:multiply;
+    }
+
+    .wrap{
+      max-width:980px;
+      margin:0 auto;
+      padding:28px 18px 48px;
+      position:relative;
+    }
+
+    .topbar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:14px;
+    }
+
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .nav a{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:rgba(255,255,255,.22);
+      color:inherit;
+      text-decoration:none;
+      font-size:12px;
+      box-shadow: 0 6px 10px rgba(0,0,0,.06);
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .nav a:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 14px rgba(0,0,0,.10);
+      text-decoration:underline;
+      text-underline-offset:2px;
+    }
+
+    .case-id{
+      font-size:12px;
+      opacity:.9;
+      border:1px dashed rgba(0,0,0,.35);
+      border-radius:12px;
+      padding:8px 10px;
+      background: rgba(255,255,255,.16);
+    }
+
+    .header{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow: 0 10px 18px var(--shadow);
+      background: rgba(255,255,255,.10);
+    }
+
+    .header-inner{
+      padding:16px 16px 14px;
+      position:relative;
+      background: linear-gradient(180deg, rgba(198,123,109,.92), rgba(198,123,109,.80));
+    }
+
+    .stamp{
+      position:absolute;
+      top:14px;
+      right:14px;
+      transform: rotate(6deg);
+      border:2px solid rgba(139,30,30,.55);
+      color: rgba(111,20,20,.78);
+      padding:8px 10px;
+      border-radius:10px;
+      text-transform:uppercase;
+      letter-spacing:1.2px;
+      font-weight:600;
+      background: rgba(139,30,30,.06);
+      box-shadow: 0 6px 16px rgba(139,30,30,.12);
+      user-select:none;
+      font-size:12px;
+    }
+
+    .kicker{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:10px;
+    }
+
+    .badge{
+      font-size:12px;
+      border:1px solid rgba(0,0,0,.22);
+      border-radius:999px;
+      padding:5px 9px;
+      background:rgba(255,255,255,.22);
+      text-transform:uppercase;
+      letter-spacing:.9px;
+      font-weight:600;
+    }
+
+    .tag{
+      font-size:12px;
+      opacity:.88;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+    }
+
+    h1{
+      margin:0 0 10px 0;
+      font-family:"Special Elite", "IBM Plex Mono", monospace;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+      font-size:26px;
+      line-height:1.15;
+    }
+
+    .subtitle{
+      margin:0;
+      font-size:13px;
+      line-height:1.55;
+      opacity:.92;
+      max-width:85ch;
+    }
+
+    .body{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+    }
+
+    .panel{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow: 0 10px 18px var(--shadow);
+      background: rgba(255,255,255,.16);
+      overflow:hidden;
+    }
+
+    .panel-head{
+      padding:12px 14px;
+      border-bottom:1px solid rgba(0,0,0,.18);
+      font-family:"Special Elite", "IBM Plex Mono", monospace;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+      font-size:14px;
+      background: rgba(255,255,255,.18);
+    }
+
+    .panel-content{
+      padding:14px 14px 16px;
+    }
+
+    .content-area{
+      background: rgba(255,255,255,.22);
+      border:1px dashed rgba(0,0,0,.35);
+      border-radius:12px;
+      padding:14px;
+      min-height:360px;
+      line-height:1.75;
+      font-size:14px;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.06);
+    }
+
+    .content-area h2,
+    .content-area h3{
+      font-family:"Special Elite", "IBM Plex Mono", monospace;
+      text-transform:uppercase;
+      letter-spacing:.7px;
+      margin-top:18px;
+      margin-bottom:10px;
+    }
+
+    .content-area a{
+      color:inherit;
+      text-decoration:underline;
+      text-underline-offset:2px;
+    }
+
+    .content-area blockquote{
+      margin:14px 0;
+      padding:10px 12px;
+      border-left:4px solid rgba(139,30,30,.45);
+      background: rgba(139,30,30,.06);
+      border-radius:10px;
+    }
+
+    .content-area ul{
+      margin:10px 0 14px 18px;
+    }
+
+    .callout{
+      border:1px solid rgba(0,0,0,.18);
+      border-radius:12px;
+      padding:12px 12px;
+      background: rgba(255,255,255,.18);
+      margin:14px 0;
+    }
+
+    .mini{
+      font-size:12.5px;
+      opacity:.92;
+    }
+
+    .footer{
+      margin-top:14px;
+      font-size:12px;
+      opacity:.85;
+      padding:0 2px;
+    }
+
+    @media (max-width: 600px){
+      h1{ font-size:22px; }
+      .stamp{ position:static; transform:none; margin-top:10px; display:inline-block; }
+      .header-inner{ padding:14px; }
+    }
+  </style>
+
+</head>
+
+<body class="tone-red">
+  <div class="wrap">
+
+    <div class="topbar">
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="index.html">← Volver al Índice</a>
+        <a href="biblioteca.html">↗ Biblioteca</a>
+      </nav>
+
+      <div class="case-id" aria-label="Identificador de expediente">
+        Registro <strong>EXP-022</strong> • Estado <strong>Abierto</strong>
+      </div>
+    </div>
+
+    <header class="header">
+      <div class="header-inner">
+        <div class="stamp">CLASIFICADO</div>
+
+        <div class="kicker">
+          <span class="badge">Expediente #022</span>
+          <span class="tag">Categoría Historia</span>
+        </div>
+
+        <h1>El Sínodo de Dort</h1>
+        <p class="subtitle">
+          Síntesis del sínodo nacional de 1618 a 1619 en Dordrecht.
+          Se examinan motivos teológicos y, sobre todo, el trasfondo político, eclesiástico y social.
+          Se incluye una explicación breve de los Cánones de Dort.
+        </p>
+      </div>
+    </header>
+
+    <main class="body">
+
+      <section class="panel" aria-label="Contenido del expediente">
+        <div class="panel-head">Cuerpo del expediente</div>
+        <div class="panel-content">
+          <div class="content-area">
+            
+<h2>Resumen ejecutivo</h2>
+<p>
+El Sínodo de Dort, celebrado en Dordrecht entre noviembre de 1618 y mayo de 1619, no fue un simple debate entre profesores.
+Fue un evento eclesiástico con mando civil, convocado por la autoridad política suprema de la República neerlandesa, y atravesado por tensiones de guerra, gobierno y orden público.
+En otras palabras, se discutía teología, pero también se estaba decidiendo quién mandaba y qué tipo de país iba a ser.
+</p>
+
+<div class="callout mini">
+<strong>Clave de lectura</strong><br>
+Cuando una controversia doctrinal coincide con luchas por el poder, la “pureza teológica” tiende a viajar en carroza escoltada por soldados.
+</div>
+
+<h2>1. Contexto histórico</h2>
+<p>
+A comienzos del siglo XVII, las Provincias Unidas estaban afirmando su identidad estatal en medio de la guerra con España.
+El periodo del Sínodo se cruza con la llamada Tregua de los Doce Años, una pausa en la guerra que, lejos de calmar todo, reordenó internas políticas.
+En ese clima, la disputa sobre predestinación y gracia se volvió una bandera para facciones enfrentadas.
+</p>
+
+<h2>2. El conflicto eclesiástico, explicado sin caricaturas</h2>
+<p>
+Tras la muerte de Jacobus Arminius en 1609, sus seguidores presentaron en 1610 un documento conocido como la Remonstrancia.
+Allí resumían cinco objeciones a ciertas formulaciones rígidas sobre predestinación y gracia.
+Sus opositores, asociados a Franciscus Gomarus, respondieron con una Contra Remonstrancia y presionaron por un sínodo nacional para zanjar el conflicto.
+</p>
+<p>
+En términos prácticos, no se trataba solo de exégesis.
+Se trataba de qué interpretación sería considerada normativa y quién quedaría dentro o fuera del ministerio reconocido.
+</p>
+
+<h2>3. Quién lo impulsó y quién lo autorizó</h2>
+<p>
+El Sínodo se celebró por autoridad de los Estados Generales, el poder civil central de la República.
+Esto le dio un carácter de juicio nacional, no meramente de reunión eclesial.
+También permitió que la salida del conflicto incluyera medidas de Estado, no solo resoluciones doctrinales.
+</p>
+
+<h2>4. Los intereses políticos en juego</h2>
+<h3>4.1 Maurice de Nassau y el tablero del poder</h3>
+<p>
+El estatúder Maurice de Nassau, comandante militar y figura política central, terminó apoyando a los Contra Remonstrantes.
+En parte por convicción y en parte porque el conflicto religioso era una vía para consolidar poder frente a sus adversarios.
+El sínodo se volvió una herramienta para desarmar a la facción rival y disciplinar el país.
+</p>
+
+<h3>4.2 Oldenbarnevelt, Grotius y el costo de perder</h3>
+<p>
+Johan van Oldenbarnevelt, estadista influyente y protector de los Remonstrantes, cayó en desgracia.
+Tras el desenlace del Sínodo, fue condenado y ejecutado en mayo de 1619.
+Hugo Grotius, jurista ligado al mismo entorno político, fue condenado a prisión y luego escapó.
+El mensaje era claro.
+La derrota teológica vino acompañada de derrota política, y no fue simbólica.
+</p>
+
+<div class="callout">
+<strong>Lectura fría</strong><br>
+En Dort se definió doctrina y se reasignó poder.
+Los perdedores no solo perdieron un debate, perdieron cargos, libertad y en algunos casos la vida.
+</div>
+
+<h2>5. Intereses eclesiásticos y sociales</h2>
+<ul>
+  <li><strong>Unidad confesional</strong> Se buscaba imponer una fórmula doctrinal común y terminar la ambigüedad en púlpitos y universidades.</li>
+  <li><strong>Control del ministerio</strong> Quedaba en juego quién podía predicar, enseñar y administrar sacramentos dentro de la iglesia estatal.</li>
+  <li><strong>Orden público</strong> La controversia había generado disturbios locales y divisiones en ciudades.
+El poder civil quería paz interna, aunque fuese una paz con expulsiones.</li>
+</ul>
+
+<h2>6. Dimensión internacional</h2>
+<p>
+Dort fue un sínodo con delegados extranjeros invitados de varias iglesias reformadas europeas.
+Eso le dio prestigio y también presión.
+No era solo un pleito doméstico, era una vitrina de ortodoxia reformada ante Europa.
+</p>
+
+<h2>7. Los Cánones de Dort</h2>
+<p>
+El producto doctrinal más famoso del Sínodo fueron los Cánones de Dort.
+No son un tratado sistemático completo, sino un juicio contra las posiciones remonstrantes en cinco apartados, con afirmaciones y una sección de rechazo de errores.
+</p>
+<ul>
+  <li><strong>Primer punto</strong> elección y reprobación</li>
+  <li><strong>Segundo punto</strong> muerte de Cristo y redención</li>
+  <li><strong>Tercer y cuarto punto</strong> corrupción humana y conversión</li>
+  <li><strong>Quinto punto</strong> perseverancia de los santos</li>
+</ul>
+<p>
+Con el tiempo, estos cinco apartados fueron resumidos popularmente como TULIP, aunque el acrónimo es posterior y no pertenece al siglo XVII.
+</p>
+
+<h2>8. Resultado y consecuencias</h2>
+<p>
+El Sínodo declaró inadmisibles las doctrinas remonstrantes dentro del marco confesional reformado de la República.
+Se ordenaron medidas contra ministros que no acataran.
+En el plano político, el triunfo de la facción asociada a Maurice de Nassau consolidó un giro de poder interno.
+En el plano eclesiástico, la iglesia neerlandesa salió más disciplinada y menos tolerante con la diversidad interna.
+</p>
+
+<h2>9. Cierre con ironía respetuosa</h2>
+<p>
+Dort suele presentarse como el momento en que la teología ganó.
+Pero el marcador se entiende mejor cuando se mira la tribuna.
+Había exégetas, sí, pero también leyes, cargos, alianzas y un Estado que no se limitó a observar el debate.
+</p>
+
+<h2>Bibliografía sugerida</h2>
+<ul>
+  <li>Actas y documentos del Sínodo de Dort en ediciones críticas modernas</li>
+  <li>Estudios sobre la República neerlandesa durante la Tregua de los Doce Años</li>
+  <li>Ediciones de los Cánones de Dort con su sección de rechazo de errores</li>
+</ul>
+
+            <p class="mini">Volver al <a href="index.html">Índice</a> • Ir a la <a href="biblioteca.html">Biblioteca</a></p>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">
+        Nota de edición. Este expediente está escrito para mostrar el trasfondo de poder.
+        Si querés, puedo agregar una cronología en formato tabla y un mapa de actores con alianzas.
+      </div>
+
+    </main>
+  </div>
+</body>
+</html>
