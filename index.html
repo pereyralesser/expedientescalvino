@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Expedientes Calvino</title>
+
+  <!-- Fuentes con vibra “máquina de escribir” -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=IBM+Plex+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Papel envejecido */
+      --paper:#efe4c9;
+      --paper-2:#e8d9b7;
+      --ink:#171512;
+
+      /* Tintas apagadas (como tus capturas) */
+      --card-green:#8aa7a0;
+      --card-ochre:#d7b56b;
+      --card-red:#c67b6d;
+      --card-blue:#7f9aa2;
+
+      --border: rgba(23,21,18,.45);
+      --shadow: rgba(0,0,0,.10);
+
+      --stamp:#8b1e1e;
+      --stamp-ink:#6f1414;
+
+      --radius: 14px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 800px at 20% 10%, rgba(255,255,255,.35), transparent 60%),
+        radial-gradient(900px 700px at 80% 30%, rgba(0,0,0,.05), transparent 60%),
+        linear-gradient(180deg, var(--paper), var(--paper-2));
+      font-family:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      overflow-x:hidden;
+    }
+
+    /* “Manchas” sutiles tipo papel escaneado */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      opacity:.28;
+      background:
+        radial-gradient(12px 10px at 12% 20%, rgba(0,0,0,.10), transparent 60%),
+        radial-gradient(18px 14px at 70% 16%, rgba(0,0,0,.08), transparent 60%),
+        radial-gradient(22px 18px at 86% 62%, rgba(0,0,0,.07), transparent 60%),
+        radial-gradient(14px 10px at 28% 78%, rgba(0,0,0,.08), transparent 60%),
+        radial-gradient(900px 500px at 50% 110%, rgba(0,0,0,.06), transparent 60%);
+      mix-blend-mode:multiply;
+    }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:28px 18px 48px;
+      position:relative;
+    }
+
+    header{
+      position:relative;
+      padding:18px 18px 22px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:rgba(255,255,255,.18);
+      box-shadow: 0 10px 18px var(--shadow);
+      overflow:hidden;
+    }
+
+    .topline{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      min-width:260px;
+    }
+
+    .brand h1{
+      font-family:"Special Elite", "IBM Plex Mono", monospace;
+      margin:0 0 8px 0;
+      font-size:34px;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+    }
+
+    .brand p{
+      margin:0;
+      line-height:1.45;
+      font-size:14px;
+      opacity:.9;
+      max-width:70ch;
+    }
+
+    .stamp{
+      align-self:flex-start;
+      transform:rotate(-3deg);
+      border:2px solid var(--stamp);
+      color:var(--stamp-ink);
+      padding:10px 12px;
+      border-radius:10px;
+      text-transform:uppercase;
+      font-weight:600;
+      letter-spacing:1.2px;
+      background:rgba(139,30,30,.06);
+      box-shadow: 0 6px 16px rgba(139,30,30,.12);
+      position:relative;
+      user-select:none;
+    }
+    .stamp small{
+      display:block;
+      font-weight:400;
+      letter-spacing:.8px;
+      margin-top:6px;
+      opacity:.9;
+    }
+
+    .meta{
+      margin-top:14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .pill{
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:12px;
+      background:rgba(255,255,255,.22);
+      box-shadow: 0 6px 10px rgba(0,0,0,.06);
+    }
+
+    .divider{
+      margin:22px 0 14px;
+      height:2px;
+      background:linear-gradient(90deg, rgba(0,0,0,.25), rgba(0,0,0,.05), rgba(0,0,0,.25));
+      border-radius:999px;
+      opacity:.55;
+    }
+
+    .section-title{
+      margin:0 0 12px 0;
+      font-family:"Special Elite", "IBM Plex Mono", monospace;
+      font-size:18px;
+      letter-spacing:.8px;
+      text-transform:uppercase;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .card{
+      grid-column: span 6;
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      box-shadow: 0 10px 18px var(--shadow);
+      overflow:hidden;
+      position:relative;
+      transition: transform .12s ease, box-shadow .12s ease;
+      background: rgba(255,255,255,.08);
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 14px 22px rgba(0,0,0,.14);
+    }
+
+    .card a{
+      display:block;
+      color:inherit;
+      text-decoration:none;
+      padding:16px 16px 14px;
+      min-height:150px;
+    }
+
+    .card .kicker{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      justify-content:space-between;
+      margin-bottom:10px;
+    }
+
+    .badge{
+      font-size:12px;
+      border:1px solid rgba(0,0,0,.22);
+      border-radius:999px;
+      padding:5px 9px;
+      background:rgba(255,255,255,.22);
+      text-transform:uppercase;
+      letter-spacing:.9px;
+      font-weight:600;
+    }
+
+    .tag{
+      font-size:12px;
+      opacity:.85;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+    }
+
+    .card h3{
+      margin:0 0 10px 0;
+      font-family:"Special Elite", "IBM Plex Mono", monospace;
+      font-size:18px;
+      line-height:1.2;
+      text-transform:uppercase;
+      letter-spacing:.6px;
+    }
+
+    .card p{
+      margin:0;
+      font-size:13px;
+      line-height:1.55;
+      opacity:.92;
+    }
+
+    .card .cta{
+      margin-top:10px;
+      font-size:12px;
+      opacity:.9;
+      letter-spacing:.7px;
+      text-transform:uppercase;
+    }
+    .card .cta span{
+      text-decoration:underline;
+      text-underline-offset:2px;
+    }
+
+    /* “Tintas” por categoría */
+    .tone-green{ background: linear-gradient(180deg, rgba(138,167,160,.92), rgba(138,167,160,.80)); }
+    .tone-ochre{ background: linear-gradient(180deg, rgba(215,181,107,.92), rgba(215,181,107,.80)); }
+    .tone-red{ background: linear-gradient(180deg, rgba(198,123,109,.92), rgba(198,123,109,.80)); }
+    .tone-blue{ background: linear-gradient(180deg, rgba(127,154,162,.92), rgba(127,154,162,.80)); }
+
+    /* Marca de sello (estética expediente) */
+    .card::after{
+      content:"ARCHIVO";
+      position:absolute;
+      top:12px; right:12px;
+      font-size:11px;
+      padding:6px 8px;
+      border:2px solid rgba(139,30,30,.55);
+      color: rgba(111,20,20,.75);
+      text-transform:uppercase;
+      letter-spacing:1.2px;
+      border-radius:10px;
+      transform: rotate(7deg);
+      background: rgba(139,30,30,.06);
+    }
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .card{ grid-column: span 12; }
+      .brand h1{ font-size:30px; }
+    }
+
+    footer{
+      margin-top:26px;
+      padding:14px 10px 0;
+      font-size:12px;
+      opacity:.85;
+    }
+
+    .note{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:flex-start;
+      border:1px dashed rgba(0,0,0,.35);
+      border-radius:12px;
+      padding:12px 12px;
+      background: rgba(255,255,255,.16);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="topline">
+        <div class="brand">
+          <h1>Expedientes Calvino</h1>
+          <p>
+            Un análisis crítico de las inconsistencias teológicas y éticas de la doble predestinación.
+          </p>
+        </div>
+
+        <div class="stamp" aria-label="Sello de clasificación">
+          CLASIFICADO
+          <small>Teología • Historia • Exégesis</small>
+        </div>
+      </div>
+
+      <div class="meta" role="list" aria-label="Metadatos del archivo">
+        <div class="pill" role="listitem">BIBLIOTECA</div>
+        <div class="pill" role="listitem">DOSSIER: JUAN CALVINO</div>
+        <div class="pill" role="listitem">LINKS</div>
+      </div>
+
+      <div class="divider"></div>
+      <h2 class="section-title">Índice general</h2>
+    </header>
+
+    <main>
+      <div class="grid">
+
+        <!-- Núcleo de la doble predestinación -->
+        <article class="card tone-green">
+          <a href="001.html">
+            <div class="kicker">
+              <span class="badge">Expediente #001</span>
+              <span class="tag">Núcleo</span>
+            </div>
+            <h3>El Decreto Eterno (y sus dos caras)</h3>
+            <p>
+              Análisis del decreto de predestinación como acto unilateral que determina simultáneamente salvación y condenación desde la eternidad.
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+        <article class="card tone-ochre">
+          <a href="002.html">
+            <div class="kicker">
+              <span class="badge">Expediente #002</span>
+              <span class="tag">Núcleo</span>
+            </div>
+            <h3>¿Amor Incondicional o Selección Incondicional?</h3>
+            <p>
+              Crítica a la limitación del “amor electivo” y su coexistencia con un “odio preordenado” hacia los réprobos.
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+        <article class="card tone-red">
+          <a href="003.html">
+            <div class="kicker">
+              <span class="badge">Expediente #003</span>
+              <span class="tag">Núcleo</span>
+            </div>
+            <h3>El Problema del Mal Preordenado</h3>
+            <p>
+              Si Dios decreta soberanamente todo lo que sucede, ¿es Él el autor último del pecado y del mal?
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+        <article class="card tone-blue">
+          <a href="004.html">
+            <div class="kicker">
+              <span class="badge">Expediente #004</span>
+              <span class="tag">Núcleo</span>
+            </div>
+            <h3>La Expiación Limitada: ¿“Buenas Nuevas” para todos?</h3>
+            <p>
+              Paradoja de predicar una salvación que, en teoría, Cristo no adquirió para la mayoría de los oyentes.
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+        <article class="card tone-green">
+          <a href="005.html">
+            <div class="kicker">
+              <span class="badge">Expediente #005</span>
+              <span class="tag">Núcleo</span>
+            </div>
+            <h3>Compatibilismo Calvinista: ¿Libertad real o ilusión útil?</h3>
+            <p>
+              Crítica a la definición de “libertad” como hacer lo que uno desea, aun cuando los deseos estarían causalmente determinados.
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+        <!-- Inconsistencias lógicas y hermenéuticas -->
+        <article class="card tone-ochre">
+          <a href="006.html">
+            <div class="kicker">
+              <span class="badge">Expediente #006</span>
+              <span class="tag">Hermenéutica</span>
+            </div>
+            <h3>La Fe: ¿Regalo divino o deber humano imposible?</h3>
+            <p>
+              Tensión entre ordenar creer a todos (p. ej. Mc 16:16) y otorgar la fe solo a los elegidos.
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+        <article class="card tone-blue">
+          <a href="007.html">
+            <div class="kicker">
+              <span class="badge">Expediente #007</span>
+              <span class="tag">Hermenéutica</span>
+            </div>
+            <h3>1 Timoteo 2:4 vs. la Doble Predestinación</h3>
+            <p>
+              ¿Cómo puede Dios “querer que todos sean salvos” si decretó activamente lo contrario para muchos?
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+        <article class="card tone-red">
+          <a href="008.html">
+            <div class="kicker">
+              <span class="badge">Expediente #008</span>
+              <span class="tag">Hermenéutica</span>
+            </div>
+            <h3>Ezequiel 18:23 — “¿Quiero yo la muerte del impío?”</h3>
+            <p>
+              Pasajes sobre la voluntad revelada de Dios en tensión con la idea de un decreto secreto inmutable.
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+        <article class="card tone-green">
+          <a href="009.html">
+            <div class="kicker">
+              <span class="badge">Expediente #009</span>
+              <span class="tag">Hermenéutica</span>
+            </div>
+            <h3>Perseverancia de los Santos: ¿Garantía o paradoja?</h3>
+            <p>
+              Si es imposible caer, ¿qué sentido real tienen las advertencias bíblicas y la exhortación a perseverar?
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+        <article class="card tone-ochre">
+          <a href="010.html">
+            <div class="kicker">
+              <span class="badge">Expediente #010</span>
+              <span class="tag">Romanos 9</span>
+            </div>
+            <h3>Interpretando Romanos 9: ¿Pottería o Contexto?</h3>
+            <p>
+              Lectura calvinista vs. interpretaciones alternativas (corporativa, histórico-nacional) con análisis detallado.
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+        <!-- Implicaciones pastorales y éticas -->
+        <article class="card tone-blue">
+          <a href="011.html">
+            <div class="kicker">
+              <span class="badge">Expediente #011</span>
+              <span class="tag">Pastoral</span>
+            </div>
+            <h3>Evangelismo Calvinista: ¿Qué se proclama realmente?</h3>
+            <p>
+              Tensión práctica de invitar a creer a alguien que podría ser réprobo sin provisión expiatoria.
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+        <article class="card tone-red">
+          <a href="012.html">
+            <div class="kicker">
+              <span class="badge">Expediente #012</span>
+              <span class="tag">Pastoral</span>
+            </div>
+            <h3>La Sombra del “Quizás”: efectos psicológicos de la duda</h3>
+            <p>
+              Impacto sobre la seguridad de salvación cuando la elección es inescrutable y la fe funciona como evidencia a posteriori.
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+        <article class="card tone-green">
+          <a href="013.html">
+            <div class="kicker">
+              <span class="badge">Expediente #013</span>
+              <span class="tag">Ética</span>
+            </div>
+            <h3>¿Dos Voluntades en Conflicto? La “esquizofrenia” divina</h3>
+            <p>
+              Crítica a la doctrina de la voluntad dual como solución: decreta una cosa, desea otra.
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+        <article class="card tone-ochre">
+          <a href="014.html">
+            <div class="kicker">
+              <span class="badge">Expediente #014</span>
+              <span class="tag">Ética</span>
+            </div>
+            <h3>Atribución moral en un universo determinista</h3>
+            <p>
+              Si nuestras acciones están causadas, ¿cómo sostener responsabilidad genuina sin trasladar la culpa última al Creador?
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+        <article class="card tone-blue">
+          <a href="015.html">
+            <div class="kicker">
+              <span class="badge">Expediente #015</span>
+              <span class="tag">Derivas</span>
+            </div>
+            <h3>Del Calvinismo al Hipercalvinismo: ¿pendiente resbaladiza?</h3>
+            <p>
+              Cómo la lógica interna puede llevar a quietismo evangelístico, fatalismo práctico y enfriamiento misionero.
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+        <!-- Historia y alternativas -->
+        <article class="card tone-green">
+          <a href="016.html">
+            <div class="kicker">
+              <span class="badge">Expediente #016</span>
+              <span class="tag">Historia</span>
+            </div>
+            <h3>Antes de Calvino: ¿qué creía la iglesia primitiva?</h3>
+            <p>
+              Examen de Padres de la Iglesia y el desarrollo histórico de libre albedrío y predestinación.
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+        <article class="card tone-ochre">
+          <a href="017.html">
+            <div class="kicker">
+              <span class="badge">Expediente #017</span>
+              <span class="tag">Arminianismo</span>
+            </div>
+            <h3>La protesta de los Remonstrantes</h3>
+            <p>
+              Los cinco puntos alternativos: una crítica sistemática clásica al Sínodo de Dort.
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+        <article class="card tone-blue">
+          <a href="018.html">
+            <div class="kicker">
+              <span class="badge">Expediente #018</span>
+              <span class="tag">Sistemas</span>
+            </div>
+            <h3>Calvinismo moderado: ¿es coherente?</h3>
+            <p>
+              4 puntos, Amyraldianismo y tensiones internas: cuando la máquina teológica intenta “aflojar” sin romperse.
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+        <article class="card tone-red">
+          <a href="019.html">
+            <div class="kicker">
+              <span class="badge">Expediente #019</span>
+              <span class="tag">Reforma</span>
+            </div>
+            <h3>Lecturas no-calvinistas de los Reformadores</h3>
+            <p>
+              Evidencias y matices en Lutero, Melanchthon y otros frente a formulaciones beza-calvinistas posteriores.
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+        <article class="card tone-green">
+          <a href="020.html">
+            <div class="kicker">
+              <span class="badge">Expediente #020</span>
+              <span class="tag">Síntesis</span>
+            </div>
+            <h3>Conclusión: hacia una soteriología de amor y agencia</h3>
+            <p>
+              Propuesta alternativa que busca sostener gracia preveniente y soberanía divina sin determinismo rígido.
+            </p>
+            <div class="cta">→ <span>Abrir expediente</span></div>
+          </a>
+        </article>
+
+      </div>
+
+      <footer>
+        <div class="nota">
+          <div>🗂️</div>
+          <div>
+            <strong>Nota:</strong> Este sitio analiza las problemáticas teológicas, éticas y pastorales derivadas del calvinismo y su doctrina de la doble predestinación. Su objetivo es un examen crítico y documentado, que fomente la reflexión y el diálogo informado a la luz de las Escrituras y la coherencia doctrinal.
+
+«Examínenlo todo; retengan lo bueno» (1 Tes 5:21).
+          </div>
+        </div>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
