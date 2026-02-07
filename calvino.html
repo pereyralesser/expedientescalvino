@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Dossier Juan Calvino | Expedientes Calvino</title>
+
+  <!-- Tipografías estilo “máquina de escribir / expediente” -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --paper:#f3e6cf;
+      --ink:#1a1a1a;
+
+      --card-teal:#9fb9b3;
+      --card-amber:#d7b37b;
+      --card-rose:#d08b86;
+      --card-moss:#aeb8a7;
+
+      --stamp:#8b1e1e;
+      --border:#2b2b2b;
+      --shadow: rgba(0,0,0,.18);
+
+      --link:#8b1e1e;
+      --link2:#1c5f61;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 800px at 30% 10%, rgba(0,0,0,.06), transparent 60%),
+        radial-gradient(900px 700px at 80% 30%, rgba(0,0,0,.05), transparent 55%),
+        linear-gradient(0deg, rgba(0,0,0,.03), rgba(0,0,0,.03)),
+        var(--paper);
+      font-family: "Special Elite", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    a{color:var(--link); text-decoration: none}
+    a:hover{ text-decoration: underline }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 22px 14px 60px;
+    }
+
+    header{
+      position: relative;
+      padding: 18px 18px 16px;
+      border: 2px solid var(--border);
+      background: rgba(255,255,255,.25);
+      box-shadow: 0 10px 22px var(--shadow);
+      border-radius: 10px;
+      overflow:hidden;
+    }
+
+    header:before{
+      content:"";
+      position:absolute;
+      inset:-30px -30px auto auto;
+      width: 220px;
+      height: 120px;
+      transform: rotate(8deg);
+      background: rgba(139,30,30,.08);
+      border: 2px solid rgba(139,30,30,.25);
+      box-shadow: 0 8px 18px rgba(0,0,0,.08);
+    }
+
+    .topline{
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .site-title{
+      font-size: 34px;
+      letter-spacing: .5px;
+      margin: 0;
+      line-height: 1.05;
+      text-transform: uppercase;
+    }
+
+    .site-sub{
+      margin: 8px 0 0;
+      font-family: "Share Tech Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      opacity: .9;
+      font-size: 14px;
+    }
+
+    .nav{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      font-family: "Share Tech Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+    }
+
+    .nav a{
+      display:inline-block;
+      padding: 8px 10px;
+      border: 2px solid var(--border);
+      background: rgba(255,255,255,.35);
+      border-radius: 10px;
+      box-shadow: 0 6px 14px rgba(0,0,0,.10);
+    }
+
+    .stamp{
+      display:inline-block;
+      margin-top: 12px;
+      padding: 8px 10px;
+      border: 3px solid var(--stamp);
+      color: var(--stamp);
+      transform: rotate(-2deg);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: rgba(255,255,255,.2);
+      font-size: 13px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 860px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 10px 22px var(--shadow);
+      overflow:hidden;
+    }
+
+    .card .hd{
+      padding: 14px 16px;
+      border-bottom: 2px solid rgba(0,0,0,.25);
+    }
+
+    .card .bd{
+      padding: 14px 16px;
+      background: rgba(255,255,255,.18);
+    }
+
+    .hd h2{
+      margin:0;
+      font-size: 20px;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+    }
+
+    .hd .tag{
+      margin-top: 6px;
+      font-family: "Share Tech Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      opacity: .9;
+    }
+
+    .teal .hd{ background: var(--card-teal); }
+    .amber .hd{ background: var(--card-amber); }
+    .rose .hd{ background: var(--card-rose); }
+    .moss .hd{ background: var(--card-moss); }
+
+    .mono{
+      font-family: "Share Tech Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .hr{
+      height: 2px;
+      background: rgba(0,0,0,.35);
+      margin: 12px 0;
+    }
+
+    ul{ margin: 10px 0 0 18px; }
+    li{ margin: 6px 0; }
+
+    .imgbox{
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      padding: 14px 16px 16px;
+      background: rgba(255,255,255,.14);
+    }
+
+    figure{
+      margin:0;
+      width: 100%;
+      border: 2px solid rgba(0,0,0,.35);
+      border-radius: 10px;
+      overflow:hidden;
+      box-shadow: 0 10px 22px rgba(0,0,0,.18);
+      background: rgba(255,255,255,.25);
+    }
+
+    figure img{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+
+    figcaption{
+      padding: 10px 12px;
+      font-family: "Share Tech Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      opacity: .95;
+    }
+
+    .smallnote{
+      font-size: 12px;
+      opacity: .9;
+    }
+
+    .links a{
+      color: var(--link2);
+    }
+
+    .footer{
+      margin-top: 18px;
+      padding: 14px 16px;
+      border: 2px dashed rgba(0,0,0,.35);
+      border-radius: 10px;
+      background: rgba(255,255,255,.12);
+      font-family: "Share Tech Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      opacity: .95;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="topline">
+        <div>
+          <h1 class="site-title">Dossier Juan Calvino</h1>
+          <p class="site-sub">Archivo de referencia. Perfil biográfico, controversias, entorno político-religioso, y rutas de lectura pública.</p>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Navegación">
+        <a href="index.html">↩ Volver a Expedientes</a>
+        <a href="biblioteca.html" target="_blank" rel="noopener noreferrer">📚 Biblioteca</a>
+        <a href="023.html">Expediente #023 (Institución)</a>
+        <a href="022.html">Expediente #022 (Dort)</a>
+      </nav>
+
+      <div class="stamp">Documento de trabajo • “expediente”</div>
+    </header>
+
+    <section class="grid">
+      <article class="card teal">
+        <div class="hd">
+          <h2>Perfil rápido</h2>
+          <div class="tag">Noyon (1509) → Ginebra (1564) · Reforma · organización eclesial · disciplina social</div>
+        </div>
+        <div class="bd">
+          <p>
+            Juan Calvino fue un reformador francés que, tras su formación humanista y jurídica, terminó convirtiéndose en el gran organizador de la Reforma
+            en Ginebra. Su proyecto no se limitó a “ideas”, sino que se tradujo en instituciones, ordenanzas eclesiásticas, predicación sostenida, y una
+            visión intensa del rol público de la Iglesia.
+          </p>
+
+          <div class="hr"></div>
+
+          <p class="mono"><strong>Virtudes que hasta sus críticos suelen reconocer</strong></p>
+          <ul>
+            <li><strong>Capacidad organizativa</strong> para estructurar una iglesia y un sistema educativo-teológico con proyección europea.</li>
+            <li><strong>Disciplina de trabajo</strong> fuera de escala: comentarios bíblicos, cartas, sermones y revisiones sucesivas de su obra mayor.</li>
+            <li><strong>Coherencia interna</strong> en su arquitectura doctrinal, especialmente en la doctrina de la gracia y la soberanía divina.</li>
+          </ul>
+
+          <p class="mono"><strong>Sombras y defectos, sin maquillaje</strong></p>
+          <ul>
+            <li><strong>Estilo polémico</strong> y combativo en controversias, con una retórica que hoy suena brutal por momentos.</li>
+            <li><strong>Rigor disciplinario</strong> en un contexto donde moral, ciudadanía y fe se entrelazaban, y el margen de “disenso” era estrecho.</li>
+            <li><strong>Uso del aparato civil</strong> (consejos, tribunales, magistraturas) para sancionar desvíos doctrinales o morales, lo que abre el debate sobre coerción religiosa.</li>
+          </ul>
+
+          <div class="hr"></div>
+
+          <p class="smallnote">
+            Nota de método: este dossier no busca hagiografía ni demonización. La historia real suele ser un animal de dos cabezas:
+            ideas + poder, convicciones + contexto, virtudes + costumbres de época.
+          </p>
+        </div>
+      </article>
+
+      <aside class="card amber">
+        <div class="hd">
+          <h2>Imagen de referencia</h2>
+          <div class="tag">Retrato clásico</div>
+        </div>
+        <div class="imgbox">
+          <figure>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/c/c5/John_Calvin_by_Holbein.png"
+              alt="Retrato de Juan Calvino (ilustración histórica)"/>
+            <figcaption>
+              Juan Calvino — retrato histórico (fuente: Wikimedia Commons).<br/>
+              <span class="smallnote">Si el navegador bloquea la carga, se reemplazará por otra imagen pública (Commons).</span>
+            </figcaption>
+          </figure>
+        </div>
+      </aside>
+    </section>
+
+    <section class="card rose" style="margin-top:16px;">
+      <div class="hd">
+        <h2>Ginebra y las “actas”</h2>
+        <div class="tag">Consejos civiles · Consistorio · registros · disciplina · política</div>
+      </div>
+      <div class="bd">
+        <p>
+          Cuando se habla de “las actas de Ginebra” en tiempos de Calvino, suele apuntarse a registros institucionales que documentan
+          la vida real de una ciudad reformada: audiencias, correcciones, disputas, sanciones, casos matrimoniales, moral pública,
+          persistencias del culto católico, y choques entre pastores y magistrados.
+        </p>
+
+        <p class="mono"><strong>Qué era el Consistorio</strong></p>
+        <p>
+          El Consistorio fue un tribunal eclesiástico con participación de pastores y magistrados, orientado a supervisar y corregir conducta y creencias.
+          Es aquí donde la Reforma se vuelve “administración”: no solo doctrina, también disciplina, orden social y decisiones que tocan la vida cotidiana.
+        </p>
+
+        <p class="mono"><strong>Por qué esto importa para entender su carácter</strong></p>
+        <ul>
+          <li>Porque revela la tensión entre la <strong>convicción pastoral</strong> y el <strong>poder civil</strong>.</li>
+          <li>Porque muestra el choque entre <strong>libertad de conciencia</strong> y <strong>uniformidad confesional</strong> en una Europa de estados confesionales.</li>
+          <li>Porque ayuda a separar mitos de archivo: lo que “se dice” vs. lo que “se hizo”.</li>
+        </ul>
+
+        <div class="hr"></div>
+
+        <p class="mono"><strong>Puertas de entrada a registros y estudios (acceso público)</strong></p>
+        <ul class="links">
+          <li><a href="https://geneva16th.org/" target="_blank" rel="noopener noreferrer">Geneva16th.org (investigación con fuentes primarias y contexto social/político)</a></li>
+          <li><a href="https://geneve16e.ch/" target="_blank" rel="noopener noreferrer">Base “Genève 16e” (fichas biográficas y búsqueda en datos asociados a registros)</a></li>
+          <li><a href="https://books.google.com.py/books?id=3fNu22ed8NQC&printsec=frontcover&source=gbs_vpt_read" target="_blank" rel="noopener noreferrer">Registers of the Consistory of Geneva in the Time of Calvin (Google Books)</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card moss" style="margin-top:16px;">
+      <div class="hd">
+        <h2>Controversias clave</h2>
+        <div class="tag">Servet · Castellio · oposición interna · sucesión y endurecimiento</div>
+      </div>
+      <div class="bd">
+        <p class="mono"><strong>1) Miguel Servet (1553): el caso que no se va</strong></p>
+        <p>
+          El conflicto con Miguel Servet se volvió un símbolo de la pregunta más incómoda de la modernidad temprana:
+          ¿puede una ciudad cristiana castigar con muerte la herejía? Independientemente de la postura doctrinal de Servet,
+          el episodio muestra la lógica de época: el disenso teológico se percibía como amenaza civil.
+        </p>
+        <ul class="links">
+          <li><a href="https://archive.org/details/huntedheretic0000unse" target="_blank" rel="noopener noreferrer">The Life and Death of Michael Servetus (libro en Archive.org)</a></li>
+        </ul>
+
+        <div class="hr"></div>
+
+        <p class="mono"><strong>2) Conflictos internos en Ginebra</strong></p>
+        <p>
+          Calvino no gobernó solo ni sin oposición. Hubo facciones, resistencias y momentos de alta tensión política.
+          Su “triunfo” institucional fue también una victoria en la arena de consejos, magistraturas y alianzas locales.
+        </p>
+        <ul class="links">
+          <li><a href="https://hls-dhs-dss.ch/fr/articles/011069/" target="_blank" rel="noopener noreferrer">Diccionario Histórico de Suiza: artículo “Calvin, Jean”</a></li>
+        </ul>
+
+        <div class="hr"></div>
+
+        <p class="mono"><strong>3) La sucesión: Teodoro de Bèze y el legado</strong></p>
+        <p>
+          Teodoro de Bèze fue el heredero intelectual e institucional más influyente. Con él, la tradición reformada se proyectó
+          hacia Francia, Países Bajos y más allá, y el “calvinismo” tomó forma como escuela teológica y estrategia eclesiástica.
+        </p>
+        <ul class="links">
+          <li><a href="https://museeprotestant.org/en/notice/theodore-de-beze-1519-1605-2/" target="_blank" rel="noopener noreferrer">Musée Protestant: Theodore Beza (perfil)</a></li>
+          <li><a href="https://hls-dhs-dss.ch/fr/articles/011048/" target="_blank" rel="noopener noreferrer">Diccionario Histórico de Suiza: “Bèze, Théodore de”</a></li>
+          <li><a href="https://archive.org/details/theodorebezacoun00bair" target="_blank" rel="noopener noreferrer">Biografía histórica de Beza (Archive.org, 1899)</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card amber" style="margin-top:16px;">
+      <div class="hd">
+        <h2>Eco hispano</h2>
+        <div class="tag">Casiodoro de Reina · exilios · tensiones reformadas</div>
+      </div>
+      <div class="bd">
+        <p>
+          En el exilio protestante del siglo XVI, no todo fue “unidad”. Hubo fricciones entre corrientes, sospechas de herejía,
+          y prácticas disciplinarias duras. El itinerario de Casiodoro de Reina muestra esa complejidad: huyendo de la Inquisición,
+          también sufrió conflictos con sectores reformados estrictos.
+        </p>
+
+        <ul class="links">
+          <li><a href="https://protestantedigital.com/print/40204/Por_que_persiguieron_algunos_calvinistas_a_Casiodoro_de_Reina_I" target="_blank" rel="noopener noreferrer">Protestante Digital: persecución y conflicto en torno a Casiodoro de Reina (I)</a></li>
+          <li><a href="https://archive.org/details/theodorebezacoun00bair" target="_blank" rel="noopener noreferrer">Contexto del “clima reformado” en el siglo XVI (Beza y redes reformadas)</a></li>
+        </ul>
+
+        <p class="smallnote">
+          Nota: el objetivo aquí no es “culpar” por deporte, sino reconocer que en las reformas del siglo XVI (católicas y protestantes)
+          la presión social y política sobre el disenso fue un rasgo estructural.
+        </p>
+      </div>
+    </section>
+
+    <section class="card teal" style="margin-top:16px;">
+      <div class="hd">
+        <h2>Ruta de lectura recomendada</h2>
+        <div class="tag">Biografía · contexto civil · obra teológica</div>
+      </div>
+      <div class="bd">
+        <p class="mono"><strong>Entradas biográficas (públicas)</strong></p>
+        <ul class="links">
+          <li><a href="https://museeprotestant.org/en/notice/jean-calvin-1509-1564/" target="_blank" rel="noopener noreferrer">Musée Protestant (EN): Jean Calvin (1509-1564)</a></li>
+          <li><a href="https://museeprotestant.org/notice/jean-calvin-1509-1564/" target="_blank" rel="noopener noreferrer">Musée Protestant (FR): Jean Calvin (1509-1564)</a></li>
+          <li><a href="https://www.worldhistory.org/trans/es/1-20202/juan-calvino/" target="_blank" rel="noopener noreferrer">World History Encyclopedia (ES): Juan Calvino</a></li>
+          <li><a href="https://hls-dhs-dss.ch/fr/articles/011069/" target="_blank" rel="noopener noreferrer">Diccionario Histórico de Suiza (FR): Calvin, Jean</a></li>
+        </ul>
+
+        <div class="hr"></div>
+
+        <p class="mono"><strong>Actas, registros y vida cotidiana</strong></p>
+        <ul class="links">
+          <li><a href="https://geneva16th.org/" target="_blank" rel="noopener noreferrer">Geneva16th.org</a></li>
+          <li><a href="https://geneve16e.ch/" target="_blank" rel="noopener noreferrer">Genève 16e (base asociada a los registros)</a></li>
+          <li><a href="https://books.google.com.py/books?id=3fNu22ed8NQC&printsec=frontcover&source=gbs_vpt_read" target="_blank" rel="noopener noreferrer">Registers of the Consistory of Geneva in the Time of Calvin (Google Books)</a></li>
+        </ul>
+
+        <div class="hr"></div>
+
+        <p class="mono"><strong>La obra y textos en línea</strong></p>
+        <ul class="links">
+          <li><a href="https://www.lexilogos.com/calvin_jean.htm" target="_blank" rel="noopener noreferrer">Lexilogos: textos y recursos (incluye obras y ediciones en línea)</a></li>
+          <li><a href="023.html">Expediente #023: Los Institutos (ruta interna)</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="footer">
+      <div><strong>Expedientes Calvino</strong> · Dossier</div>
+      
+    </div>
+  </div>
+</body>
+</html>
