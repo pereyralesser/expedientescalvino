@@ -187,7 +187,7 @@
       font-size:13px;
       line-height:1.55;
       opacity:.92;
-      max-width:85ch;
+      max-width:90ch;
     }
 
     .body{
@@ -219,61 +219,115 @@
       padding:14px 14px 16px;
     }
 
-    .content-area{
-      background: rgba(255,255,255,.22);
-      border:1px dashed rgba(0,0,0,.35);
-      border-radius:12px;
-      padding:14px;
-      min-height:360px;
-      line-height:1.75;
-      font-size:14px;
-      box-shadow: inset 0 0 0 2px rgba(255,255,255,.06);
+    /* === NUEVO: grilla de tarjetas === */
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:12px;
+    }
+    @media (max-width: 920px){ .cards{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 620px){ .cards{ grid-template-columns: 1fr; } }
+
+    .card{
+      border:1px solid var(--border);
+      border-radius: 14px;
+      overflow:hidden;
+      background: rgba(255,255,255,.20);
+      box-shadow: 0 10px 18px rgba(0,0,0,.08);
+      transition: transform .12s ease, box-shadow .12s ease;
+      position:relative;
+      min-height: 210px;
+      display:flex;
+      flex-direction:column;
+    }
+    .card:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 14px 20px rgba(0,0,0,.12);
     }
 
-    .content-area h2,
-    .content-area h3{
+    .card-hd{
+      padding:12px 12px 10px;
+      border-bottom:1px solid rgba(0,0,0,.18);
       font-family:"Special Elite", "IBM Plex Mono", monospace;
-      text-transform:uppercase;
       letter-spacing:.7px;
-      margin-top:18px;
-      margin-bottom:10px;
+      text-transform:uppercase;
+      font-size:13px;
+      position:relative;
+    }
+    .tone-g .card-hd{ background: linear-gradient(180deg, rgba(138,167,160,.92), rgba(138,167,160,.78)); }
+    .tone-o .card-hd{ background: linear-gradient(180deg, rgba(215,181,107,.92), rgba(215,181,107,.78)); }
+    .tone-r .card-hd{ background: linear-gradient(180deg, rgba(198,123,109,.92), rgba(198,123,109,.78)); }
+    .tone-b .card-hd{ background: linear-gradient(180deg, rgba(127,154,162,.92), rgba(127,154,162,.78)); }
+
+    .card-bd{
+      padding:12px;
+      line-height:1.65;
+      font-size:13px;
+      opacity:.95;
+      flex: 1;
     }
 
-    .content-area a{
+    .meta{
+      font-size:12px;
+      opacity:.85;
+      margin-top:8px;
+    }
+
+    .btnrow{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      padding: 10px 12px 12px;
+      border-top: 1px dashed rgba(0,0,0,.28);
+      background: rgba(255,255,255,.14);
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 9px;
+      border:1px solid rgba(0,0,0,.22);
+      border-radius:999px;
+      background: rgba(255,255,255,.22);
       color:inherit;
+      text-decoration:none;
+      font-size:12px;
+      box-shadow: 0 6px 10px rgba(0,0,0,.06);
+    }
+    .btn:hover{
       text-decoration:underline;
       text-underline-offset:2px;
     }
 
-    .content-area blockquote{
-      margin:14px 0;
-      padding:10px 12px;
-      border-left:4px solid rgba(139,30,30,.45);
-      background: rgba(139,30,30,.06);
+    .bookrow{
+      display:grid;
+      grid-template-columns: 62px 1fr;
+      gap:10px;
+      align-items:start;
+    }
+    .cover{
+      width:62px; height:92px;
+      border:1px solid rgba(0,0,0,.28);
       border-radius:10px;
+      background: rgba(255,255,255,.22);
+      overflow:hidden;
+      box-shadow: 0 10px 16px rgba(0,0,0,.10);
+    }
+    .cover img{
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
     }
 
-    .content-area code{
-      background: rgba(0,0,0,.06);
-      padding:2px 5px;
-      border-radius:6px;
-    }
-
-    .content-area ul{
-      margin:10px 0 14px 18px;
-    }
-
-    .callout{
-      border:1px solid rgba(0,0,0,.18);
+    .note{
+      margin: 10px 0 0;
+      font-size:12px;
+      opacity:.9;
+      background: rgba(255,255,255,.20);
+      border:1px dashed rgba(0,0,0,.32);
+      padding:10px 12px;
       border-radius:12px;
-      padding:12px 12px;
-      background: rgba(255,255,255,.18);
-      margin:14px 0;
-    }
-
-    .mini{
-      font-size:12.5px;
-      opacity:.92;
+      line-height:1.6;
     }
 
     .footer{
@@ -296,8 +350,9 @@
     <div class="topbar">
       <nav class="nav" aria-label="Navegación principal">
         <a href="index.html">← Volver al Índice</a>
+        <a href="calvino.html">Dossier Calvino</a>
       </nav>
-      <div class="case-id">Registro <strong>BIB-001</strong> • Estado <strong>En construcción</strong></div>
+      <div class="case-id">Registro <strong>BIB-001</strong> • Estado <strong>En expansión</strong></div>
     </div>
 
     <header class="header">
@@ -308,27 +363,312 @@
           <span class="tag">Fuentes y enlaces</span>
         </div>
         <h1>Biblioteca de consulta</h1>
-        <p class="subtitle">Página destinada a enlaces a libros, artículos y recursos en línea. Pegá aquí tu listado con el mismo estilo de dossier.</p>
+        <p class="subtitle">
+          Recursos para estudiar soteriología desde perspectivas no-deterministas: textos clásicos, bibliotecas abiertas, teólogos contemporáneos,
+          y bibliografía de tradición bautista no calvinista. Todos los enlaces externos abren en pestaña nueva.
+        </p>
       </div>
     </header>
 
     <main class="body">
+
+      <!-- OBRAS PRIMARIAS -->
       <section class="panel">
-        <div class="panel-head">Listado</div>
+        <div class="panel-head">Obras primarias y bibliotecas abiertas</div>
         <div class="panel-content">
-          <div class="content-area">
-            <h2>Sección sugerida</h2>
-            <ul>
-              <li>R. C. Sproul, recursos de doctrina reformada</li>
-              <li>John Piper, artículos y sermones sobre soberanía</li>
-              <li>Roger E. Olson, <em>Against Calvinism</em></li>
-              <li>Ben Witherington III, trabajos sobre Pablo</li>
-              <li>William Lane Craig, defensa del molinismo</li>
-            </ul>
-            <p class="mini">Volver al <a href="index.html">Índice</a></p>
+
+          <div class="cards">
+
+            <article class="card tone-g">
+              <div class="card-hd">Jacobo Arminio — Obras completas (inglés)</div>
+              <div class="card-bd">
+                Edición clásica en tres volúmenes, accesible en línea y con opción de PDF.
+                Ideal para ir a la fuente antes de discutir etiquetas.
+                <div class="meta">Acceso libre • Texto + PDF</div>
+              </div>
+              <div class="btnrow">
+                <a class="btn" href="https://ccel.org/ccel/arminius/works1" target="_blank" rel="noopener noreferrer">CCEL Vol. 1</a>
+                <a class="btn" href="https://ccel.org/ccel/arminius/works2/works2.toc.html" target="_blank" rel="noopener noreferrer">CCEL Vol. 2</a>
+                <a class="btn" href="https://onlinebooks.library.upenn.edu/webbin/book/lookupid?key=olbp10879" target="_blank" rel="noopener noreferrer">UPenn Online Books</a>
+                <a class="btn" href="https://www.ccel.org/ccel/a/arminius/works1/cache/works1.pdf" target="_blank" rel="noopener noreferrer">PDF Vol. 1</a>
+              </div>
+            </article>
+
+            <article class="card tone-b">
+              <div class="card-hd">Arminio — Escaneos históricos (Archive.org)</div>
+              <div class="card-bd">
+                Digitalizaciones de la edición inglesa del siglo XIX (Nichols).
+                Útil para citar con paginación “de biblioteca” y verificar traducciones.
+                <div class="meta">Acceso libre • Visor + descargas</div>
+              </div>
+              <div class="btnrow">
+                <a class="btn" href="https://archive.org/details/worksofjamesarmi02armi" target="_blank" rel="noopener noreferrer">Vol. 2 (Archive)</a>
+                <a class="btn" href="https://archive.org/search?query=title%3A%28works%20of%20James%20Arminius%29%20Nichols" target="_blank" rel="noopener noreferrer">Buscar otros tomos</a>
+              </div>
+            </article>
+
+            <article class="card tone-o">
+              <div class="card-hd">Wesley Center Online (obras y sermones)</div>
+              <div class="card-bd">
+                Archivo académico con colecciones de John Wesley y tradición wesleyana.
+                Mucho material directo sobre gracia, fe y perseverancia.
+                <div class="meta">Acceso libre • Colecciones curadas</div>
+              </div>
+              <div class="btnrow">
+                <a class="btn" href="https://wesley.nnu.edu/john-wesley/" target="_blank" rel="noopener noreferrer">Portal Wesley</a>
+                <a class="btn" href="https://nnu.whdl.org/en/browse/collections/14127" target="_blank" rel="noopener noreferrer">Sermones (1872)</a>
+                <a class="btn" href="https://wesley.nnu.edu/john-wesley/the-sermons-of-john-wesley-1872-edition/" target="_blank" rel="noopener noreferrer">Índice (Wesley)</a>
+              </div>
+            </article>
+
+            <article class="card tone-r">
+              <div class="card-hd">Adam Clarke — comentario bíblico (gratis)</div>
+              <div class="card-bd">
+                Comentario clásico metodista, valioso para exégesis y debates soteriológicos
+                sin caer en reduccionismos de sistema.
+                <div class="meta">Acceso libre • Navegación por libros bíblicos</div>
+              </div>
+              <div class="btnrow">
+                <a class="btn" href="https://www.studylight.org/commentaries/eng/acc.html" target="_blank" rel="noopener noreferrer">StudyLight (Clarke)</a>
+                <a class="btn" href="https://www.stepbible.org/version.jsp?version=Clarke" target="_blank" rel="noopener noreferrer">STEPBible (Clarke)</a>
+              </div>
+            </article>
+
+          </div>
+
+          <div class="note">
+            <strong>Sobre traducciones al español/portugués:</strong> el acceso libre y completo suele estar mucho más disponible en inglés (CCEL/Archive).
+            En español y portugués aparecen traducciones parciales, reseñas o ediciones comerciales. Esta biblioteca prioriza enlaces de acceso público y estable.
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TEÓLOGOS Y SITIOS -->
+      <section class="panel">
+        <div class="panel-head">Teólogos y sitios (línea no determinista) — artículos, debates y recursos</div>
+        <div class="panel-content">
+          <div class="cards">
+
+            <article class="card tone-g">
+              <div class="card-hd">Society of Evangelical Arminians (SEA)</div>
+              <div class="card-bd">
+                Portal con artículos, enlaces, entrevistas y bibliografía sobre elección, gracia y predestinación.
+                Útil como “hub” de recursos contemporáneos.
+                <div class="meta">Acceso libre • Sitio de referencia</div>
+              </div>
+              <div class="btnrow">
+                <a class="btn" href="https://evangelicalarminians.org/" target="_blank" rel="noopener noreferrer">Entrar</a>
+                <a class="btn" href="https://evangelicalarminians.org/about-this-website/" target="_blank" rel="noopener noreferrer">Acerca del sitio</a>
+                <a class="btn" href="https://evangelicalarminians.org/about-us/" target="_blank" rel="noopener noreferrer">Acerca de SEA</a>
+              </div>
+            </article>
+
+            <article class="card tone-b">
+              <div class="card-hd">Arminian Perspectives (Ben Henshaw)</div>
+              <div class="card-bd">
+                Blog de análisis bíblico-teológico con respuestas detalladas a objeciones clásicas, especialmente sobre Juan 6, Romanos 9, “muertos en pecado”, etc.
+                <div class="meta">Acceso libre • Archivo grande</div>
+              </div>
+              <div class="btnrow">
+                <a class="btn" href="https://arminianperspectives.wordpress.com/" target="_blank" rel="noopener noreferrer">Inicio</a>
+                <a class="btn" href="https://arminianperspectives.wordpress.com/?s=Romans+9" target="_blank" rel="noopener noreferrer">Buscar “Romanos 9”</a>
+              </div>
+            </article>
+
+            <article class="card tone-o">
+              <div class="card-hd">Soteriology 101 (Leighton Flowers)</div>
+              <div class="card-bd">
+                Sitio de divulgación y debate soteriológico (elección, predestinación, responsabilidad humana, lectura de Pablo) desde una postura no calvinista.
+                <div class="meta">Acceso libre • Artículos + podcast</div>
+              </div>
+              <div class="btnrow">
+                <a class="btn" href="https://soteriology101.com/" target="_blank" rel="noopener noreferrer">Sitio</a>
+                <a class="btn" href="https://soteriology101.com/home/" target="_blank" rel="noopener noreferrer">Podcast</a>
+              </div>
+            </article>
+
+            <article class="card tone-r">
+              <div class="card-hd">Pensamiento Pentecostal (Fernando E. Alvarado)</div>
+              <div class="card-bd">
+                Ensayos en español con foco en teología, santidad y polémicas doctrinales. Útil como voz hispana para contrastar argumentos y lenguaje pastoral.
+                <div class="meta">Acceso libre • Español</div>
+              </div>
+              <div class="btnrow">
+                <a class="btn" href="https://pensamientopentecostalarminiano.org/" target="_blank" rel="noopener noreferrer">Inicio</a>
+                <a class="btn" href="https://pensamientopentecostalarminiano.org/2019/03/25/el-arminianismo-clasico-y-el-universalismo-condicionado/" target="_blank" rel="noopener noreferrer">Artículo (ejemplo)</a>
+              </div>
+            </article>
+
+            <article class="card tone-b">
+              <div class="card-hd">Grace for All Coalition</div>
+              <div class="card-bd">
+                Red colaborativa anti-determinista con recursos y declaraciones. Interesante como “termómetro” del debate actual en el mundo evangélico.
+                <div class="meta">Acceso libre • Red/coalición</div>
+              </div>
+              <div class="btnrow">
+                <a class="btn" href="https://grace-for-all-coalition.mailchimpsites.com/" target="_blank" rel="noopener noreferrer">Sitio</a>
+                <a class="btn" href="https://grace-for-all-coalition.mailchimpsites.com/rationale" target="_blank" rel="noopener noreferrer">Rationale</a>
+              </div>
+            </article>
+
           </div>
         </div>
       </section>
+
+      <!-- TRADICIÓN BAUTISTA NO CALVINISTA -->
+      <section class="panel">
+        <div class="panel-head">Tradición bautista no calvinista — rutas de estudio</div>
+        <div class="panel-content">
+          <div class="cards">
+
+            <article class="card tone-o">
+              <div class="card-hd">Free Will Baptists — visión doctrinal</div>
+              <div class="card-bd">
+                Presentación institucional breve de la doctrina “free will / free grace / free salvation”.
+                Buen punto de partida para ubicar términos sin convertirlos en slogans.
+                <div class="meta">Acceso libre • Síntesis</div>
+              </div>
+              <div class="btnrow">
+                <a class="btn" href="https://nafwb.org/site/what-is-a-free-will-baptist/" target="_blank" rel="noopener noreferrer">NAFWB</a>
+              </div>
+            </article>
+
+            <article class="card tone-g">
+              <div class="card-hd">Connect316 — “Traditionalist” (SBC)</div>
+              <div class="card-bd">
+                Corriente bautista “tradicionalista” dentro del entorno bautista del sur. Útil para entender debates internos y lenguaje propio del contexto SBC.
+                <div class="meta">Acceso libre • Noticia y contexto</div>
+              </div>
+              <div class="btnrow">
+                <a class="btn" href="https://www.baptistpress.com/resource-library/news/connect316-defends-traditionalist-doctrines/" target="_blank" rel="noopener noreferrer">Baptist Press</a>
+                <a class="btn" href="https://soteriology101.com/tag/connect316/" target="_blank" rel="noopener noreferrer">Archivo (menciones)</a>
+              </div>
+            </article>
+
+            <article class="card tone-b">
+              <div class="card-hd">Whosoever Will (Allen / Lemke)</div>
+              <div class="card-bd">
+                Crítica bíblico-teológica al calvinismo de cinco puntos desde autores bautistas.
+                (Excelente para “ver el contra-argumento” sin cambiar de tradición.)
+                <div class="meta">Compra • Amazon</div>
+              </div>
+              <div class="btnrow">
+                <a class="btn" href="https://www.amazon.com/Whosoever-Will-Biblical-Theological-Five-Point-Calvinism/dp/0805464166" target="_blank" rel="noopener noreferrer">Ver en Amazon</a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- LIBROS RECOMENDADOS (AMAZON + PORTADAS) -->
+      <section class="panel">
+        <div class="panel-head">Libros recomendados (compra) — portadas + enlaces</div>
+        <div class="panel-content">
+
+          <div class="cards">
+
+            <article class="card tone-r">
+              <div class="card-hd">Against Calvinism — Roger E. Olson</div>
+              <div class="card-bd">
+                <div class="bookrow">
+                  <div class="cover">
+                    <img src="https://covers.openlibrary.org/b/isbn/031032467X-L.jpg" alt="Portada: Against Calvinism (Olson)">
+                  </div>
+                  <div>
+                    Un clásico contemporáneo para discutir reputación divina, justicia, evangelio y coherencia interna del sistema.
+                    <div class="meta">ISBN: 978-0310324676</div>
+                  </div>
+                </div>
+              </div>
+              <div class="btnrow">
+                <a class="btn" href="https://www.amazon.com/Against-Calvinism-Roger-Olson/dp/031032467X" target="_blank" rel="noopener noreferrer">Comprar (Amazon)</a>
+                <a class="btn" href="https://zondervanacademic.com/products/against-calvinism" target="_blank" rel="noopener noreferrer">Ficha editorial</a>
+              </div>
+            </article>
+
+            <article class="card tone-o">
+              <div class="card-hd">Grace, Faith, Free Will — Robert E. Picirilli</div>
+              <div class="card-bd">
+                <div class="bookrow">
+                  <div class="cover">
+                    <img src="https://covers.openlibrary.org/b/isbn/0892656484-L.jpg" alt="Portada: Grace, Faith, Free Will (Picirilli)">
+                  </div>
+                  <div>
+                    Contraste soteriológico sólido desde una tradición bautista no calvinista. Muy útil para categorías y definiciones.
+                    <div class="meta">ISBN: 978-0892656486</div>
+                  </div>
+                </div>
+              </div>
+              <div class="btnrow">
+                <a class="btn" href="https://www.amazon.com/Grace-Faith-Free-Robert-Picirilli/dp/0892656484" target="_blank" rel="noopener noreferrer">Comprar (Amazon)</a>
+                <a class="btn" href="https://www.amazon.com/Gracia-Libre-Albedrio-Soteriologicos-Arminianismo/dp/0892659912" target="_blank" rel="noopener noreferrer">Edición ES (Amazon)</a>
+              </div>
+            </article>
+
+            <article class="card tone-b">
+              <div class="card-hd">The Faith Once for All — Jack Cottrell</div>
+              <div class="card-bd">
+                <div class="bookrow">
+                  <div class="cover">
+                    <img src="https://covers.openlibrary.org/b/isbn/0899009050-L.jpg" alt="Portada: The Faith Once for All (Cottrell)">
+                  </div>
+                  <div>
+                    Teología sistemática amplia (doctrina bíblica por temas). Muy usada en circuitos restauracionistas y bautistas no calvinistas.
+                    <div class="meta">ISBN: 978-0899009056</div>
+                  </div>
+                </div>
+              </div>
+              <div class="btnrow">
+                <a class="btn" href="https://www.amazon.com/Faith-Once-All-Bible-Doctrine/dp/0899009050" target="_blank" rel="noopener noreferrer">Comprar (Amazon)</a>
+                <a class="btn" href="https://www.amazon.com/una-vez-dada-Doctrina-b%C3%ADblica-ebook/dp/B00VTTI9FY" target="_blank" rel="noopener noreferrer">Edición ES (Kindle)</a>
+              </div>
+            </article>
+
+            <article class="card tone-g">
+              <div class="card-hd">Whosoever Will — David L. Allen / Steve W. Lemke</div>
+              <div class="card-bd">
+                <div class="bookrow">
+                  <div class="cover">
+                    <img src="https://covers.openlibrary.org/b/isbn/0805464166-L.jpg" alt="Portada: Whosoever Will (Allen/Lemke)">
+                  </div>
+                  <div>
+                    Respuesta bautista al TULIP con ensayos de varios autores y énfasis bíblico-teológico.
+                    <div class="meta">ISBN: 978-0805464160</div>
+                  </div>
+                </div>
+              </div>
+              <div class="btnrow">
+                <a class="btn" href="https://www.amazon.com/Whosoever-Will-Biblical-Theological-Five-Point-Calvinism/dp/0805464166" target="_blank" rel="noopener noreferrer">Comprar (Amazon)</a>
+                <a class="btn" href="https://www.amazon.com/Todo-aquel-que-cree-calvinismo-ebook/dp/B01M196NE2" target="_blank" rel="noopener noreferrer">Edición ES (Kindle)</a>
+              </div>
+            </article>
+
+          </div>
+
+          <div class="note">
+            <strong>Nota práctica:</strong> las portadas se sirven desde Open Library por ISBN (si alguna no aparece, podés reemplazar el <code>src</code> por otra imagen pública).
+            Los enlaces a tiendas y editoriales abren siempre en ventana nueva.
+          </div>
+
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">Volver / Atajos</div>
+        <div class="panel-content">
+          <div class="note">
+            <strong>Atajos internos:</strong>
+            <a href="index.html">Índice</a> •
+            <a href="023.html">Expediente #023 (Institución)</a> •
+            <a href="022.html">Expediente #022 (Dort)</a> •
+            <a href="calvino.html">Dossier Calvino</a>
+          </div>
+          <div class="footer">Expedientes Calvino</div>
+        </div>
+      </section>
+
     </main>
   </div>
 </body>
